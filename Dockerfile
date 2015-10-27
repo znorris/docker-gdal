@@ -1,4 +1,4 @@
-FROM google/golang:latest
+FROM golang:latest
 
 MAINTAINER Tiago Natel de Moura <tiago.natel@neoway.com.br>
 
@@ -20,5 +20,10 @@ RUN apt-get -qq update \
  	--with-libkml \
  	--without-pcre --without-pcraster --without-grib --without-png --without-gif --without-jpeg \
  && make -j4 \
- && make install
-
+ && make install \
+ && cd / && rm -rf /usr/src/* \
+ && apt-get -y remove --purge wget  \
+ && apt-get -y autoremove \
+ && apt-get clean \
+ && apt-get autoclean \
+ && rm -rf /var/lib/apt/lists/*
