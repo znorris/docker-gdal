@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM python:latest
 
 MAINTAINER Tiago Natel de Moura <tiago.natel@neoway.com.br>
 
@@ -27,3 +27,6 @@ RUN apt-get -qq update \
  && apt-get clean \
  && apt-get autoclean \
  && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --upgrade pip \
+  && pip install numpy GDAL
